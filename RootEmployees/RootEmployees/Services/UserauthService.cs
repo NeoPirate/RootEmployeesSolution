@@ -7,9 +7,11 @@ namespace RootEmployees.Services
 {
     public class UserauthService
     {
-        public List<UserAuth> UserauthList()
+        private List<UserAuth> UserauthList;
+
+        public UserauthService()
         {
-            var UserAuthList = new List<UserAuth>
+            UserauthList = new List<UserAuth>
             {
                 new UserAuth
                 {
@@ -22,8 +24,21 @@ namespace RootEmployees.Services
                     Password = "root"
                 }
             };
+        }
 
-            return UserAuthList;
+        public UserAuth GetUserAuth(string userName, string password)
+        {
+            var user = new UserAuth
+            {
+                UserName = userName,
+                Password = password
+            };
+
+            var userauth = this.UserauthList.Find(item => item.UserName == user.UserName && item.Password == user.Password);
+            if (userauth != null)
+                return userauth;
+
+            return null;
         }
     }
 }
