@@ -50,5 +50,19 @@ namespace RootEmployees.Services
 
             return EmployeeList;
         }
+
+        public Employee GetEmployee(string email)
+        {
+            return EmplyeeList().Find(item => item.Email == email);
+        }
+
+        public bool PostEmployee(Employee employee)
+        {
+            if (GetEmployee(employee.Email) != null)
+                return false;
+
+            EmplyeeList().Add(employee);
+            return true;
+        }
     }
 }
